@@ -1,7 +1,9 @@
 # Site of pizza restaurant.
 
-<img src="https://raw.githubusercontent.com/Borys-Mch/hoobank/pizza/screenshot.png" alt="Displaying Screenshot.png">
+<img src="https://raw.githubusercontent.com/Borys-Mch/hoobank//screenshot.png" alt="Displaying Screenshot.png">
 
-## Tehnologi
+## Tehnologi FrontEnd
 
 Built on Next JS without extraneous components
+
+## Tehnologi BackEnd
