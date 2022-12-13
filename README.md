@@ -1,6 +1,6 @@
 # Site of pizza restaurant.
 
-<img src="https://raw.githubusercontent.com/Borys-Mch/hoobank//screenshot.png" alt="Displaying Screenshot.png">
+<img src="https://github.com/Borys-Mch/pizza/blob/main/screenshot.png" alt="Displaying Screenshot.png">
 
 ## Tehnologi FrontEnd
 
