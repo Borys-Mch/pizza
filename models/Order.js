@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+mongoose.set("strictQuery", true);
+
 const OrderSchema = new mongoose.Schema(
   {
     customer: {
@@ -17,15 +19,15 @@ const OrderSchema = new mongoose.Schema(
       required: true,
     },
     status: {
-      type: [Number],
+      type: Number,
       default: 0,
     },
     method: {
-      type: [Number],
+      type: Number,
       required: true,
     },
   },
   { timestamps: true }
 );
 
-export default mongoose.model.Order || mongoose.model("Product", OrderSchema);
+export default mongoose.models.Order || mongoose.model("Order", OrderSchema);
