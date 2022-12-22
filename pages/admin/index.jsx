@@ -17,15 +17,15 @@ const index = ({ orders, products }) => {
               <th>Action</th>
             </tr>
           </thead>
-          {products.map((products) => (
-            <tbody key={products._id}>
+          {products.map((product) => (
+            <tbody key={product._id}>
               <tr>
                 <td>
-                  <Image src={products.img} alt="" width={50} height={50} />
+                  <Image src={product.img} alt="" width={50} height={50} />
                 </td>
-                <td>PizzaID</td>
-                <td>PizzaTitle</td>
-                <td>$50</td>
+                <td>{product._id.slice(0, 5)}...</td>
+                <td>{product.title}</td>
+                <td>${product.prices[0]}</td>
                 <td>
                   <button className={styles.button}>Edit</button>
                   <button className={styles.button}>Delete</button>
