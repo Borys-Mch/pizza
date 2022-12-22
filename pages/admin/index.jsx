@@ -1,8 +1,22 @@
 import axios from "axios";
 import Image from "next/image";
+import { useState } from "react";
 import styles from "../../styles/Admin.module.css";
 
-const index = ({ orders, products }) => {
+const Index = ({ orders, products }) => {
+  const [pizzaList, setPizzaList] = useState(products);
+  const [orderList, setOrderList] = useState(orders);
+
+  const handleDelete = async (id) => {
+    try {
+      const res = await axios.delete(
+        "http://localhost:3000/api/products/" + id
+      );
+      setPizzaList(pizzaList.filter((pizza) => pizza._id !== id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className={styles.container}>
       <div className={styles.item}>
@@ -17,7 +31,7 @@ const index = ({ orders, products }) => {
               <th>Action</th>
             </tr>
           </thead>
-          {products.map((product) => (
+          {pizzaList.map((product) => (
             <tbody key={product._id}>
               <tr>
                 <td>
@@ -28,7 +42,11 @@ const index = ({ orders, products }) => {
                 <td>${product.prices[0]}</td>
                 <td>
                   <button className={styles.button}>Edit</button>
-                  <button className={styles.button}>Delete</button>
+                  <button
+                    className={styles.button}
+                    onClick={() => handleDelete(product._id)}>
+                    Delete
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -78,4 +96,4 @@ export const getServerSideProps = async () => {
   };
 };
 
-export default index;
+export default Index;
