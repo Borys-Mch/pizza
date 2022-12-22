@@ -6,6 +6,7 @@ import styles from "../../styles/Admin.module.css";
 const Index = ({ orders, products }) => {
   const [pizzaList, setPizzaList] = useState(products);
   const [orderList, setOrderList] = useState(orders);
+  const status = ["preparing", "on the way", "delivered"];
 
   const handleDelete = async (id) => {
     try {
@@ -13,6 +14,22 @@ const Index = ({ orders, products }) => {
         "http://localhost:3000/api/products/" + id
       );
       setPizzaList(pizzaList.filter((pizza) => pizza._id !== id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleStatus = async (id) => {
+    const item = orderList.filter((order) => order._id === id)[0];
+    const currentStatus = item.status;
+    try {
+      const res = await axios.put("http://localhost:3000/api/orders/" + id, {
+        status: currentStatus + 1,
+      });
+      setOrderList([
+        res.data,
+        ...orderList.filter((order) => order._id !== id),
+      ]);
     } catch (err) {
       console.log(err);
     }
@@ -76,9 +93,11 @@ const Index = ({ orders, products }) => {
                 <td>
                   {order.method === 0 ? <span>cash</span> : <span>paid</span>}
                 </td>
-                <td>preparing</td>
+                <td>{status[order.status]}</td>
                 <td>
-                  <button>Next Stage</button>
+                  <button onClick={() => handleStatus(order._id)}>
+                    Next Stage
+                  </button>
                 </td>
               </tr>
             </tbody>
